@@ -1,7 +1,6 @@
-require('dotenv').config();
+require('dotenv').config(); // Ładowanie zmiennych z pliku .env
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config(); // Ładowanie zmiennych z pliku .env
 
 const app = express();
 
@@ -24,9 +23,14 @@ const clientRoutes = require('./routes/clientRoutes');
 // Używanie tras (wszystkie trasy będą zaczynać się od /api)
 app.use('/api', clientRoutes);
 
-// Trasa testowa
+// Trasa główna
 app.get('/', (req, res) => {
-    res.send('Hello, World!');
+    res.send('Welcome to the Warehouse App!'); // Możesz zmienić tę wiadomość na dowolną treść
+});
+
+// Obsługa dla tras, które nie istnieją (404 Not Found)
+app.use((req, res, next) => {
+    res.status(404).send('404 Not Found');
 });
 
 // Uruchomienie serwera
