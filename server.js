@@ -1,11 +1,15 @@
 require('dotenv').config(); // Ładowanie zmiennych z pliku .env
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors'); // Dodaj CORS
 
 const app = express();
 
 // Middleware do obsługi danych JSON
 app.use(express.json());
+
+// Middleware CORS – umożliwia połączenia między frontendem a backendem
+app.use(cors());
 
 // Połączenie z MongoDB
 mongoose.connect(process.env.MONGO_URI, {
